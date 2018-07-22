@@ -1,12 +1,3 @@
-let type;
-
-if(window.location.href.includes("huur")){
-    type = "huur";
-}
-else {
-    type = "koop";
-}
-
 let waiting = false;
 // Select the node that will be observed for mutations
 let targetNode = document.getElementsByClassName("search-map-infowindow__list")[0];
@@ -45,7 +36,15 @@ function addPrice(){
         // Extract the price.
         let price = container[i].getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
 
-        if(type === "huur"){
+        try{
+            let similar = container[i].getElementsByClassName("search-result-similar")[0];
+            similar.remove();
+        }
+        catch{
+            console.log("No similar results found.");
+        }
+
+        if(window.location.href.includes("huur")){
             try{
                 let prices = price.match(/.*\s(\d{1,})\stot.*/);
                 price = prices[1];

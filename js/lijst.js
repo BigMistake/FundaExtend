@@ -9,12 +9,19 @@ function addPrice(){
             // Loop through the individual search results, being the houses.
             for(let x = 0; x < container[i]['children'].length;x++){
                 let searchResult = container[i]['children'][x];
-                let type;
+
+                try{
+                    let similar = searchResult.getElementsByClassName("search-result-similar")[0];
+                    similar.remove();
+                }
+                catch{
+                    console.log("No similar results found.");
+                }
 
                 // Extract the price.
-                let price = searchResult.getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/v\.o\.n\./g,'');
+                let price = searchResult.getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
 
-                if(type === "huur"){
+                if(window.location.href.includes("huur")){
                     try{
                         let prices = price.match(/.*\s(\d{1,})\stot.*/);
                         price = prices[1];
@@ -24,7 +31,7 @@ function addPrice(){
                     }
                 }
 
-                let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
+                //let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
                 let perceeloppervlakte = "";
                 let woonoppervlakte = "";
 
@@ -58,7 +65,6 @@ function addPrice(){
     }
 }
 
-let type;
 let waiting = false;
 
 //First execution, the next ones will be activated by the mutation observer
