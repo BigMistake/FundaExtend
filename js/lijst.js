@@ -24,7 +24,7 @@ function addPrice(){
                     }
                 }
 
-                //let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
+                let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
                 let perceeloppervlakte = "";
                 let woonoppervlakte = "";
 
@@ -59,6 +59,7 @@ function addPrice(){
 }
 
 let type;
+let waiting = false;
 
 //First execution, the next ones will be activated by the mutation observer
 addPrice();
@@ -73,7 +74,15 @@ let config = { attributes: true, childList: true, subtree: true };
 let callback = function(mutationsList) {
     for(let mutation of mutationsList) {
         if (mutation.type === 'childList') {
-            //setTimeout(addPrice(),5000);
+            if(!waiting){
+                waiting = true;
+                addPrice();
+                observer.disconnect();
+                window.setTimeout(function(){
+                    observer.observe(targetNode, config);
+                    waiting = false;
+                },1000);
+            }
         }
     }
 };
