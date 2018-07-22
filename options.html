@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Funda Extend - Options</title>
+    <script src="/js/options.js"></script>
+</head>
+<body>
+
+<p>
+    Hier kunt u een aantal opties van Funda Extend aan of uit zetten. Deze worden naar alle apparaten waar Funda Extend geinstalleerd is gesynchroniseerd.
+</p>
+
+<ul>
+    <li>
+        <label>
+            Verwijder advertenties: <input type="checkbox" id="adverts" checked>
+        </label>
+    </li>
+    <li>
+        <label>
+            Verwijder "vergelijkbare woningen": <input type="checkbox" id="similar" checked>
+        </label>
+    </li>
+    <li>
+        <label>
+            Toon gemiddelde prijs per meter voor woonoppervlakte: <input type="checkbox" id="woon" checked>
+        </label>
+    </li>
+    <li>
+        <label>
+            Toon gemiddelde prijs per meter voor perceeloppervlakte: <input type="checkbox" id="perceel" checked>
+        </label>
+    </li>
+</ul>
+
+<p>
+    Er is ook de mogelijkheid om de WOZ waarde van een woning op te vragen, waar extra rechten voor vereist zijn (die ook weer ingetrokken kunnen worden).
+</p>
+
+<ul>
+    <li>
+        <label>
+            WOZ waarde opvragen: <input type="checkbox" id="woz">
+        </label>
+    </li>
+</ul>
+
+<div id="status"></div>
+<button id="save">Save</button>
+
+</body>
+</html>

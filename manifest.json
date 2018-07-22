@@ -15,7 +15,14 @@
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqjP0DiHo3nbT9E8ith7TvZWI/Y9bCSzndpyMsrkQnDaqCowgSRpu3m4PAVYRqc6goByRHk/34PBiUaSUvJVd7+oZG3Csm6JdMHU6Zdz4lWETqtCwDVgp0dO1YnfjfvF4P/wfuDe2pyMlIIS+xq/kpAxjTF0fCuzTS+7vmxNgydnyfJ41BVyhgVciKvoNMla6UyM20oQFZra0w5pN2ZibXrTl+Kuwdf/8z+SMLIBbWruAVIcv3h/pOsbYFQ+YUcMhmUJxAPR1GNbwXOd7WbL28IyVVhDbmmvSo9dEwjF+HKB3Hdl1M35HegZ+1dlK6oZLbdhmcceEijWIKyFYJN+2HwIDAQAB",
    "manifest_version": 2,
    "name": "Funda Extend",
+    "options_ui": {
+      "page": "options.html",
+      "open_in_tab": false
+    },
    "short_name": "FundaExtend",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.3"
+   "version": "0.1.5",
+    "permissions": [
+      "storage"
+    ]
 }

@@ -15,7 +15,7 @@ function addPrice(){
                     similar.remove();
                 }
                 catch{
-                    console.log("No similar results found.");
+                    //console.log("No similar results found.");
                 }
 
                 // Extract the price.

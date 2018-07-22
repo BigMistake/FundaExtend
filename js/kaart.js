@@ -41,7 +41,7 @@ function addPrice(){
             similar.remove();
         }
         catch{
-            console.log("No similar results found.");
+            //console.log("No similar results found.");
         }
 
         if(window.location.href.includes("huur")){
