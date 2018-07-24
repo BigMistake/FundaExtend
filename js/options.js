@@ -27,7 +27,7 @@ function restore_options() {
         removeAdverts: true,
         removeSimilar: false,
         showWoon: true,
-        showPerceel: true,
+        showPerceel: false,
         getWOZ: false
     }, function(items) {
         document.getElementById('adverts').checked = items.removeAdverts;
