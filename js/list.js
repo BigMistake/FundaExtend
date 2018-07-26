@@ -40,6 +40,22 @@ function editPage(){
                     }
                 }
 
+                function removePromo(){
+                    try{
+                        let promotext = searchResult.getElementsByClassName("search-promo-text")[0];
+                        let promolabel = searchResult.getElementsByClassName("search-promolabel")[0];
+
+                        promotext.remove();
+                        promolabel.remove();
+                    }
+                    catch{
+                        //console.log("No promo materials found.");
+                    }
+
+                    let makelaar = searchResult.getElementsByClassName("search-result-makelaar")[0];
+                    makelaar.remove();
+                }
+
                 function showWoon(){
                     let woonoppervlakte = "";
 
@@ -76,11 +92,15 @@ function editPage(){
 
                 chrome.storage.sync.get({
                     removeSimilar: false,
+                    removePromo: false,
                     showWoon: true,
                     showPerceel: false,
                 }, function(items) {
                     if(items.removeSimilar){
                         removeSimilar();
+                    }
+                    if(items.removePromo){
+                        removePromo();
                     }
                     if(items.showWoon){
                         showWoon();

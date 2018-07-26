@@ -1,14 +1,14 @@
 {
    "content_scripts": [ {
-      "js": [ "/js/jquery-3.3.1.min.js", "/js/kaart.js" ],
+      "js": [ "/js/jquery-3.3.1.min.js", "/js/map.js" ],
       "matches": [ "https://www.funda.nl/kaart/*/*" ],
       "run_at": "document_idle"
    }, {
-      "js": [ "/js/jquery-3.3.1.min.js", "/js/lijst.js" ],
+      "js": [ "/js/jquery-3.3.1.min.js", "/js/list.js" ],
       "matches": [ "https://www.funda.nl/huur/*/*", "https://www.funda.nl/koop/*/*" ],
       "run_at": "document_idle"
    } ],
-   "description": "Verwijdert reclame en laat gemiddelde prijs per m² zien.",
+   "description": "Verbeterd Funda.nl op een aantal manieren, zoals het verwijderen van reclame, en het tonen van de gemiddelde prijs per m².",
    "icons": {
       "19": "/img/icon.png"
    },
@@ -22,5 +22,5 @@
    "permissions": [ "storage" ],
    "short_name": "FundaExtend",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.6"
+   "version": "0.1.7"
 }
