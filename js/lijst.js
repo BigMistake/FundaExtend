@@ -18,7 +18,7 @@ function editPage(){
 
                 // Extract the price.
                 let price = searchResult.getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
-                let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
+                //let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
 
                 if(window.location.href.includes("huur")){
                     try{
@@ -48,7 +48,7 @@ function editPage(){
                         // Create the result elements
                         let gemiddelde = document.createElement("ul");
                         gemiddelde.setAttribute("class","search-result-kenmerken");
-                        let gemiddeldeTekst = document.createTextNode("Woonoppervlakte prijs per m²: €" + Math.round(price / woonoppervlakte));
+                        let gemiddeldeTekst = document.createTextNode("Woonoppervlakte prijs per m²: €" + Number(Math.round(price / woonoppervlakte)).toLocaleString('nl-NL'));
                         gemiddelde.appendChild(gemiddeldeTekst);
                         searchResult.children[1].children[1].children[0].children[2].appendChild(gemiddelde);
                     }
@@ -65,7 +65,7 @@ function editPage(){
                         // Create the result elements
                         let gemiddelde = document.createElement("ul");
                         gemiddelde.setAttribute("class","search-result-kenmerken");
-                        let gemiddeldeTekst = document.createTextNode("Perceeloppervlakte prijs per m²: €" + Math.round(price / perceeloppervlakte));
+                        let gemiddeldeTekst = document.createTextNode("Perceeloppervlakte prijs per m²: €" + Number(Math.round(price / perceeloppervlakte)).toLocaleString('nl-NL'));
                         gemiddelde.appendChild(gemiddeldeTekst);
                         searchResult.children[1].children[1].children[0].children[2].appendChild(gemiddelde);
                     }
