@@ -5,9 +5,9 @@ function editPage(){
         // Only the ol elements contain results, so lets get rid of the divs and uls containing ads and "recommendations".
         if(container[i].localName === "div" || container[i].localName === "ul"){
             chrome.storage.sync.get({
-                removeAdverts: false,
-            }, function(items) {
-                if(items.removeSimilar){
+                removeAdverts: false
+            }, function(item) {
+                if(item.removeAdverts === true){
                     container[i].remove();
                 }
             });
@@ -124,5 +124,8 @@ let callback = function(mutationsList) {
 // Create an observer instance linked to the callback function
 let observer = new MutationObserver(callback);
 
-// Start observing the target node for configured mutations
-observer.observe(targetNode, config);
+
+// Start observing the target node for configured mutations after initial load
+window.setTimeout(function(){
+    observer.observe(targetNode, config);
+},2000);
