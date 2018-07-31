@@ -191,30 +191,41 @@ catch{
 
             url = "https://www.wozwaardeloket.nl/api/geocoder/v2/lookup?id=" + encodeURI(id);
 
-            $.get(url, function(details) {
-                $.ajax({
-                    type: "POST",
-                    url: "https://www.wozwaardeloket.nl/woz-proxy/wozloket",
-                    data: '<wfs:GetFeature xmlns:wfs="http://www.opengis.net/wfs" service="WFS" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><wfs:Query typeName="wozloket:woz_woz_object" srsName="EPSG:28992"  xmlns:ogc="http://www.opengis.net/ogc"><ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:And><ogc:PropertyIsEqualTo matchCase="true"><ogc:PropertyName>wobj_bag_obj_id</ogc:PropertyName><ogc:Literal>' + details["adresseerbaarobject_id"].substr(1) + '</ogc:Literal></ogc:PropertyIsEqualTo></ogc:And></ogc:Filter></wfs:Query></wfs:GetFeature>',
-                    success: function(data){
-                        //let entry = data["features"][data["features"].length -1]["properties"];
-                        //console.log("Voor " +  adres + " is sinds " + entry["wobj_wrd_peildatum"] + " de WOZ waarde: €" + Number(entry["wobj_wrd_woz_waarde"]).toLocaleString('nl-NL'));
-                        let date = "00-00-0000";
-                        let element = 0;
+            window.setTimeout(function(){
+                $.get(url, function(details) {
+                    window.setTimeout(function(){
+                        $.ajax({
+                            type: "POST",
+                            url: "https://www.wozwaardeloket.nl/woz-proxy/wozloket",
+                            data: '<?xml version="1.0" encoding="UTF-8"?><wfs:GetFeature xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" service="WFS" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">' +
+                                    '<wfs:Query xmlns:WozViewer="http://WozViewer.geonovum.nl" xmlns:ogc="http://www.opengis.net/ogc" typeName="wozloket:woz_woz_object" srsName="EPSG:28992">' +
+                                        '<ogc:Filter>' +
+                                            '<ogc:PropertyIsEqualTo matchCase="true">' +
+                                                '<ogc:PropertyName>wobj_bag_obj_id</ogc:PropertyName>' +
+                                                '<ogc:Literal>' + details["adresseerbaarobject_id"].substr(1) + '</ogc:Literal>' +
+                                            '</ogc:PropertyIsEqualTo>' +
+                                        '</ogc:Filter>' +
+                                    '</wfs:Query>' +
+                                '</wfs:GetFeature>',
+                            success: function(data){
+                                let date = "00-00-0000";
+                                let element = 0;
 
-                        for(let i=0;i<data["features"].length;i++){
-                            let entry = data["features"][i]["properties"];
-                            if(entry["wobj_wrd_ingangsdatum"] > date){
-                                date = entry["wobj_wrd_peildatum"];
-                                element = i;
+                                for(let i=0;i<data["features"].length;i++){
+                                    let entry = data["features"][i]["properties"];
+                                    if(entry["wobj_wrd_ingangsdatum"] > date){
+                                        date = entry["wobj_wrd_peildatum"];
+                                        element = i;
+                                    }
+                                }
+
+                                let entry = data["features"][element]["properties"];
+                                console.log("Voor " +  adres + " is vanaf " + entry["wobj_wrd_ingangsdatum"] + " de WOZ waarde: €" + Number(entry["wobj_wrd_woz_waarde"]).toLocaleString('nl-NL'));
                             }
-                        }
-
-                        let entry = data["features"][element]["properties"];
-                        console.log("Voor " +  adres + " is vanaf " + entry["wobj_wrd_ingangsdatum"] + " de WOZ waarde: €" + Number(entry["wobj_wrd_woz_waarde"]).toLocaleString('nl-NL'));
-                    }
+                        });
+                    },2000)
                 });
-            });
+            },2000);
         });
     }
 
