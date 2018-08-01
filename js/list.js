@@ -184,8 +184,40 @@ catch{
 
     function getWOZ(){
         let url = "https://www.wozwaardeloket.nl/api/geocoder/v2/suggest?query=" + encodeURI(adres);
+        let kenmerken = document.getElementsByClassName("object-kenmerken-group-list")[1].children[0];
 
-        $.get(url, function(data) {
+        let waardeTitel = document.createElement("dt");
+        let waardeTitelTekst = document.createTextNode("WOZ Waarde");
+        waardeTitel.appendChild(waardeTitelTekst);
+        let waardeInhoud = document.createElement("dd");
+        waardeInhoud.setAttribute("id", "woz-waarde");
+        let waardeInhoudTekst = document.createTextNode("Klik hier");
+        waardeInhoud.appendChild(waardeInhoudTekst);
+
+        let meetdatum = document.createElement("dt");
+        let meetdatumTekst = document.createTextNode("Meetdatum");
+        meetdatum.appendChild(meetdatumTekst);
+        let meetdatumInhoud = document.createElement("dd");
+        meetdatumInhoud.setAttribute("id", "woz-meet");
+        let meetdatumInhoudTekst = document.createTextNode(" - ");
+        meetdatumInhoud.appendChild(meetdatumInhoudTekst);
+
+        let ingangsdatum = document.createElement("dt");
+        let ingangsdatumTekst = document.createTextNode("Ingangsdatum");
+        ingangsdatum.appendChild(ingangsdatumTekst);
+        let ingangsdatumInhoud = document.createElement("dd");
+        ingangsdatum.setAttribute("id", "woz-ingang");
+        let ingangsdatumInhoudTekst = document.createTextNode(" - ");
+        ingangsdatumInhoud.appendChild(ingangsdatumInhoudTekst);
+
+        kenmerken.appendChild(waardeTitel);
+        kenmerken.appendChild(waardeInhoud);
+        kenmerken.appendChild(meetdatum);
+        kenmerken.appendChild(meetdatumInhoud);
+        kenmerken.appendChild(ingangsdatum);
+        kenmerken.appendChild(ingangsdatumInhoud);
+
+        /*$.get(url, function(data) {
             let id = data["docs"][0]["id"];
             let adres = data["docs"][0]["weergavenaam"];
 
@@ -226,7 +258,7 @@ catch{
                     },2000)
                 });
             },2000);
-        });
+        });*/
     }
 
     chrome.storage.sync.get({
