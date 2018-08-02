@@ -23,5 +23,5 @@
    "optional_permissions": ["https://www.wozwaardeloket.nl/"],
    "short_name": "FundaExtend",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.7"
+   "version": "0.1.8"
 }

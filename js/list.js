@@ -187,7 +187,7 @@ catch{
         let kenmerken = document.getElementsByClassName("object-kenmerken-group-list")[1].children[0];
 
         let waardeTitel = document.createElement("dt");
-        let waardeTitelTekst = document.createTextNode("WOZ Waarde");
+        let waardeTitelTekst = document.createTextNode("WOZ waarde");
         waardeTitel.appendChild(waardeTitelTekst);
         let waardeInhoud = document.createElement("dd");
         waardeInhoud.setAttribute("id", "woz-waarde");
@@ -223,15 +223,12 @@ catch{
         function getWOZ(){
             $.get(url, function(data) {
                 let id = data["docs"][0]["id"];
-                let adres = data["docs"][0]["weergavenaam"];
+                //let adres = data["docs"][0]["weergavenaam"];
 
                 url = "https://www.wozwaardeloket.nl/api/geocoder/v2/lookup?id=" + encodeURI(id);
 
                 window.setTimeout(function(){
                     $.get(url, function(details) {
-                        console.log(details["centroide_rd"]["x"]);
-                        console.log(details["centroide_rd"]["y"]);
-
                         window.setTimeout(function(){
                             $.ajax({
                                 type: "POST",
@@ -264,7 +261,7 @@ catch{
                                         '</wfs:Query></wfs:GetFeature>',
                                 success: function(data){
                                     if(data["error"]){
-                                        alert("Er is iets fout gegaan. Probeer het later nog eens.");
+                                        alert("Het WOZ Waardeloket is niet bereikbaar. Controleer zelf op https://www.wozwaardeloket.nl/ of probeer het later nog eens.");
                                     }
                                     else{
                                         let date = "00-00-0000";
@@ -291,9 +288,9 @@ catch{
                                     }
                                 }
                             });
-                        },2000)
+                        },100)
                     });
-                },2000);
+                },100);
             });
         }
 
