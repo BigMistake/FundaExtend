@@ -5,7 +5,7 @@ Current features:
 - Removing unnecessary elements (adverts, "recommended" houses")
 - Listing average price per m² for houses up for sale
 - Option to see average price per m² for the living area ("woonoppervlakte") or plot size ("perceeloppervlakte")
+- Request WOZ valuation (Dutch taxation worth)
 
 Planned features:
 - Sort by m² price per page
-- Request WOZ valuation (Dutch taxation worth)
