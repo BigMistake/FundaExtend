@@ -186,39 +186,16 @@ catch{
         let url = "https://www.wozwaardeloket.nl/api/geocoder/v2/suggest?query=" + encodeURI(adres);
         let kenmerken = document.getElementsByClassName("object-kenmerken-group-list")[1].children[0];
 
-        let waardeTitel = document.createElement("dt");
-        let waardeTitelTekst = document.createTextNode("WOZ waarde");
-        waardeTitel.appendChild(waardeTitelTekst);
-        let waardeInhoud = document.createElement("dd");
-        waardeInhoud.setAttribute("id", "woz-waarde");
-        let waardeInhoudTekst = document.createTextNode("Klik hier");
-        waardeInhoud.style.cursor="pointer";
-        waardeInhoud.style.color="blue";
-        waardeInhoud.style.decoration="underline";
-        waardeInhoud.appendChild(waardeInhoudTekst);
+        $(kenmerken).append("<dt>WOZ waarde</dt>" +
+                            "<dd id=\"woz-waarde\" style=\"cursor: pointer; color: blue;\">Klik hier</dd>" +
+                            "<dt>Meetdatum</dt>" +
+                            "<dd id=\"woz-meet\"> - </dd>" +
+                            "<dt id=\"woz-ingang\">Ingangsdatum</dt>" +
+                            "<dd> - </dd>");
 
-        let meetdatum = document.createElement("dt");
-        let meetdatumTekst = document.createTextNode("Meetdatum");
-        meetdatum.appendChild(meetdatumTekst);
-        let meetdatumInhoud = document.createElement("dd");
-        meetdatumInhoud.setAttribute("id", "woz-meet");
-        let meetdatumInhoudTekst = document.createTextNode(" - ");
-        meetdatumInhoud.appendChild(meetdatumInhoudTekst);
-
-        let ingangsdatum = document.createElement("dt");
-        let ingangsdatumTekst = document.createTextNode("Ingangsdatum");
-        ingangsdatum.appendChild(ingangsdatumTekst);
-        let ingangsdatumInhoud = document.createElement("dd");
-        ingangsdatum.setAttribute("id", "woz-ingang");
-        let ingangsdatumInhoudTekst = document.createTextNode(" - ");
-        ingangsdatumInhoud.appendChild(ingangsdatumInhoudTekst);
-
-        kenmerken.appendChild(waardeTitel);
-        kenmerken.appendChild(waardeInhoud);
-        kenmerken.appendChild(meetdatum);
-        kenmerken.appendChild(meetdatumInhoud);
-        kenmerken.appendChild(ingangsdatum);
-        kenmerken.appendChild(ingangsdatumInhoud);
+        let waardeInhoud = document.getElementById("woz-waarde");
+        let meetdatumInhoud = document.getElementById("woz-meet");
+        let ingangsdatumInhoud = document.getElementById("woz-ingang");
 
         function getWOZ(){
             $.get(url, function(data) {
