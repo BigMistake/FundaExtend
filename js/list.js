@@ -183,15 +183,15 @@ catch{
     }
 
     function getWOZ(){
-        let url = "https://www.wozwaardeloket.nl/api/geocoder/v2/suggest?query=" + encodeURI(adres);
+        let url = "https://www.wozwaardeloket.nl/api/geocoder/v3/suggest?query=" + encodeURI(adres);
         let kenmerken = document.getElementsByClassName("object-kenmerken-group-list")[1].children[0];
 
         $(kenmerken).append("<dt>WOZ waarde</dt>" +
                             "<dd id=\"woz-waarde\" style=\"cursor: pointer; color: blue;\">Klik hier</dd>" +
                             "<dt>Meetdatum</dt>" +
                             "<dd id=\"woz-meet\"> - </dd>" +
-                            "<dt id=\"woz-ingang\">Ingangsdatum</dt>" +
-                            "<dd> - </dd>");
+                            "<dt>Ingangsdatum</dt>" +
+                            "<dd id=\"woz-ingang\"> - </dd>");
 
         let waardeInhoud = document.getElementById("woz-waarde");
         let meetdatumInhoud = document.getElementById("woz-meet");
@@ -199,10 +199,18 @@ catch{
 
         function getWOZ(){
             $.get(url, function(data) {
-                let id = data["docs"][0]["id"];
+                let id;
+
+                if(data["docs"][0]["type"] === "postcode"){
+                    id = data["docs"][1]["id"];
+                }
+                else {
+                    id = data["docs"][0]["id"];
+                }
+
                 //let adres = data["docs"][0]["weergavenaam"];
 
-                url = "https://www.wozwaardeloket.nl/api/geocoder/v2/lookup?id=" + encodeURI(id);
+                url = "https://www.wozwaardeloket.nl/api/geocoder/v3/lookup?id=" + encodeURI(id);
 
                 window.setTimeout(function(){
                     $.get(url, function(details) {
@@ -238,7 +246,7 @@ catch{
                                         '</wfs:Query></wfs:GetFeature>',
                                 success: function(data){
                                     if(data["error"]){
-                                        alert("Het WOZ Waardeloket is niet bereikbaar. Controleer zelf op https://www.wozwaardeloket.nl/ of probeer het later nog eens.");
+                                        alert("Het WOZ Waardeloket is niet bereikbaar. Controleer zelf op www.wozwaardeloket.nl of probeer het later nog eens.");
                                     }
                                     else{
                                         let date = "00-00-0000";
