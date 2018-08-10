@@ -1,7 +1,16 @@
+const resultContainer = "[data-instant-search-output=\"results\"]";
+const priceContainer = "search-result-price";
+const similarContainer = "\"search-result-similar\"";
+const promoTextContainer = "search-promo-text";
+const promoLabelContainer = "\"search-promolabel\"";
+const makelaarContainer = "search-result-makelaar";
+const woonOppervlakteContainer = "[title=\"Woonoppervlakte\"]";
+const perceelOppervlakteContainer = "[title=\"Perceeloppervlakte\"]";
+
 try{
     function editPage(){
         // Get the container for the search results, with the ol containers that hold the individual results.
-        let container = Array.prototype.slice.call(document.querySelectorAll('[data-instant-search-output="results"]')[0]['children']);
+        let container = Array.prototype.slice.call(document.querySelectorAll(resultContainer)[0]['children']);
         for(let i = 0; i < container.length;i++){
             // Only the ol elements contain results, so lets get rid of the divs and uls containing ads and "recommendations".
             if(container[i].localName === "div" || container[i].localName === "ul"){
@@ -18,7 +27,7 @@ try{
                     let searchResult = container[i]['children'][x];
 
                     // Extract the price.
-                    let price = searchResult.getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
+                    let price = searchResult.getElementsByClassName(priceContainer)[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
                     //let adres = searchResult.getElementsByClassName('search-result-title')[0].innerText;
 
                     if(window.location.href.includes("huur")){
@@ -33,7 +42,7 @@ try{
 
                     function removeSimilar(){
                         try{
-                            let similar = searchResult.getElementsByClassName("search-result-similar")[0];
+                            let similar = searchResult.getElementsByClassName(similarContainer)[0];
                             similar.remove();
                         }
                         catch{
@@ -43,8 +52,8 @@ try{
 
                     function removePromo(){
                         try{
-                            let promotext = searchResult.getElementsByClassName("search-promo-text")[0];
-                            let promolabel = searchResult.getElementsByClassName("search-promolabel")[0];
+                            let promotext = searchResult.getElementsByClassName(promoTextContainer)[0];
+                            let promolabel = searchResult.getElementsByClassName(promoLabelContainer)[0];
 
                             promotext.remove();
                             promolabel.remove();
@@ -53,7 +62,7 @@ try{
                             //console.log("No promo materials found.");
                         }
 
-                        let makelaar = searchResult.getElementsByClassName("search-result-makelaar")[0];
+                        let makelaar = searchResult.getElementsByClassName(makelaarContainer)[0];
                         makelaar.remove();
                     }
 
@@ -61,7 +70,7 @@ try{
                         let woonoppervlakte = "";
 
                         try{
-                            woonoppervlakte = searchResult.querySelector('[title="Woonoppervlakte"]').innerText.replace(" m²","").replace(".","");
+                            woonoppervlakte = searchResult.querySelector(woonOppervlakteContainer).innerText.replace(" m²","").replace(".","");
                             // Create the result elements
                             let gemiddelde = document.createElement("ul");
                             gemiddelde.setAttribute("class","search-result-kenmerken");
@@ -78,7 +87,7 @@ try{
                         let perceeloppervlakte = "";
 
                         try{
-                            perceeloppervlakte = searchResult.querySelector('[title="Perceeloppervlakte"]').innerText.replace(" m²","").replace(".","");
+                            perceeloppervlakte = searchResult.querySelector(perceelOppervlakteContainer).innerText.replace(" m²","").replace(".","");
                             // Create the result elements
                             let gemiddelde = document.createElement("ul");
                             gemiddelde.setAttribute("class","search-result-kenmerken");

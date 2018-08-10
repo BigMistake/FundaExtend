@@ -1,3 +1,9 @@
+const priceContainer = "search-result-price";
+const similarContainer = "search-result-similar";
+const woonOppervlakteContainer = "[title=\"Woonoppervlakte\"]";
+const perceelOppervlakteContainer = "[title=\"Perceeloppervlakte\"]";
+const mapContainer = "search-map-infowindow__list";
+
 function editPage(){
     let container = "";
 
@@ -11,7 +17,7 @@ function editPage(){
     for(let i = 0; i < container.length;i++){
 
         // Extract the price.
-        let price = container[i].getElementsByClassName('search-result-price')[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
+        let price = container[i].getElementsByClassName(priceContainer)[0].innerText.replace(/\./g,'').replace(/€/g,'').replace(/kk/g,'').replace(/\/mnd/g,'').replace(/von/g,'');
 
         if(window.location.href.includes("huur")){
             try{
@@ -25,7 +31,7 @@ function editPage(){
 
         function removeSimilar(){
             try{
-                let similar = container[i].getElementsByClassName("search-result-similar")[0];
+                let similar = container[i].getElementsByClassName(similarContainer)[0];
                 similar.remove();
             }
             catch{
@@ -37,7 +43,7 @@ function editPage(){
             let woonoppervlakte = "";
 
             try{
-                woonoppervlakte = container[i].querySelector('[title="Woonoppervlakte"]').innerText.replace(" m²","").replace(".","");
+                woonoppervlakte = container[i].querySelector(woonOppervlakteContainer).innerText.replace(" m²","").replace(".","");
                 // Create the result elements
                 let gemiddelde = document.createElement("ul");
                 gemiddelde.setAttribute("class","search-result-kenmerken");
@@ -55,7 +61,7 @@ function editPage(){
             let perceeloppervlakte = "";
 
             try{
-                perceeloppervlakte = container[i].querySelector('[title="Perceeloppervlakte"]').innerText.replace(" m²","").replace(".","");
+                perceeloppervlakte = container[i].querySelector(perceelOppervlakteContainer).innerText.replace(" m²","").replace(".","");
                 // Create the result elements
                 let gemiddelde = document.createElement("ul");
                 gemiddelde.setAttribute("class","search-result-kenmerken");
@@ -88,7 +94,7 @@ function editPage(){
 
 let waiting = false;
 // Select the node that will be observed for mutations
-let targetNode = document.getElementsByClassName("search-map-infowindow__list")[0];
+let targetNode = document.getElementsByClassName(mapContainer)[0];
 
 // Options for the observer (which mutations to observe)
 let config = { attributes: true, childList: true, subtree: true };
