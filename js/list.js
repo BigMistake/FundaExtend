@@ -4,7 +4,7 @@ const similarContainer = "\"search-result-similar\"";
 const promoTextContainer = "search-promo-text";
 const promoLabelContainer = "\"search-promolabel\"";
 const makelaarContainer = "search-result-makelaar";
-const woonOppervlakteContainer = "[title=\"Woonoppervlakte\"]";
+const woonOppervlakteContainer = "[title=\"Gebruiksoppervlakte wonen\"]";
 const perceelOppervlakteContainer = "[title=\"Perceeloppervlakte\"]";
 
 try{
