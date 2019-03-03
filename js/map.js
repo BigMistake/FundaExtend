@@ -1,6 +1,6 @@
 const priceContainer = "search-result-price";
 const similarContainer = "search-result-similar";
-const woonOppervlakteContainer = "[title=\"Woonoppervlakte\"]";
+const woonOppervlakteContainer = "[title=\"Gebruiksoppervlakte wonen\"]";
 const perceelOppervlakteContainer = "[title=\"Perceeloppervlakte\"]";
 const mapContainer = "search-map-infowindow__list";
 
@@ -52,7 +52,7 @@ function editPage(){
                 container[i].children[1].children[1].children[0].children[2].appendChild(gemiddelde);
             }
             catch (err) {
-                //console.log("Geen woonoppervlakte voor deze advertentie gevonden: " + adres);
+                console.log("Geen woonoppervlakte voor deze advertentie gevonden.");
             }
         }
 
