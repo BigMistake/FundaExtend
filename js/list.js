@@ -76,7 +76,7 @@ try{
                             gemiddelde.setAttribute("class","search-result-kenmerken");
                             let gemiddeldeTekst = document.createTextNode("Woonoppervlakte prijs per m²: €" + Number(Math.round(price / woonoppervlakte)).toLocaleString('nl-NL'));
                             gemiddelde.appendChild(gemiddeldeTekst);
-                            searchResult.children[1].children[1].children[0].children[2].appendChild(gemiddelde);
+                            searchResult.lastElementChild.lastElementChild.lastElementChild.lastElementChild.appendChild(gemiddelde);
                         }
                         catch (err) {
                             //console.log("Geen woonoppervlakte voor deze advertentie gevonden: " + adres);
@@ -93,7 +93,7 @@ try{
                             gemiddelde.setAttribute("class","search-result-kenmerken");
                             let gemiddeldeTekst = document.createTextNode("Perceeloppervlakte prijs per m²: €" + Number(Math.round(price / perceeloppervlakte)).toLocaleString('nl-NL'));
                             gemiddelde.appendChild(gemiddeldeTekst);
-                            searchResult.children[1].children[1].children[0].children[2].appendChild(gemiddelde);
+                            searchResult.lastElementChild.lastElementChild.lastElementChild.lastElementChild.appendChild(gemiddelde);
                         }
                         catch (err) {
                             //console.log("Geen perceeloppervlakte voor deze advertentie gevonden: " + adres);
