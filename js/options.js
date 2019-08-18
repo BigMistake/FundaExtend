@@ -4,6 +4,7 @@ function save_options() {
     let removePromo = document.getElementById('promo').checked;
     let showWoon = document.getElementById('woon').checked;
     let showPerceel = document.getElementById('perceel').checked;
+    let showCustomSort = document.getElementById('customsort').checked;
 
     chrome.storage.sync.set({
         removeAdverts: removeAdverts,
@@ -11,6 +12,7 @@ function save_options() {
         removePromo: removePromo,
         showWoon: showWoon,
         showPerceel: showPerceel,
+        showCustomSort: showCustomSort
     }, function() {
         let status = document.getElementById('status');
         status.textContent = 'Options saved.';
@@ -85,14 +87,17 @@ function restore_options() {
         removePromo: false,
         showWoon: true,
         showPerceel: false,
+        showCustomSort: true,
     }, function(items) {
         document.getElementById('adverts').checked = items.removeAdverts;
         document.getElementById('similar').checked = items.removeSimilar;
         document.getElementById('promo').checked = items.removePromo;
         document.getElementById('woon').checked = items.showWoon;
         document.getElementById('perceel').checked = items.showPerceel;
+        document.getElementById('customsort').checked = items.showCustomSort;
     });
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     restore_options();
     checkPermissions();
