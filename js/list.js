@@ -14,7 +14,7 @@ const searchContainer = "search-content-toggle";
 const userObject = "user-save-object";
 const addObject = "[data-save-object-handle=\"add\"]";
 const removeObject = "[data-save-object-handle=\"remove\"]";
-const itemAttributes = [{"naam": "vraagprijs","weergave" : "Vraagprijs"},{"naam":"woonoppervlakte","weergave":"Woonoppervlakte"},{"naam":"woonoppervlakte_prijs","weergave":"Woonoppervlakte Prijs"},{"naam":"perceeloppervlakte","weergave":"Perceeloppervlakte"},{"naam":"perceeloppervlak_prijs","weergave":"Perceeloppervlakte Prijs"},{"naam":"kamers","weergave":"Kamers"},{"naam":"plaats","weergave":"Plaats"},{"naam":"postcode","weergave":"Postcode"},{"naam":"adres","weergave":"Adres"}];
+const itemAttributes = [{"naam": "price","weergave" : "Vraagprijs"},{"naam":"woon","weergave":"Woonoppervlakte"},{"naam":"woonprice","weergave":"Woonoppervlakte Prijs"},{"naam":"perceel","weergave":"Perceeloppervlakte"},{"naam":"perceelprice","weergave":"Perceeloppervlakte Prijs"},{"naam":"kamers","weergave":"Kamers"},{"naam":"plaats","weergave":"Plaats"},{"naam":"postcode","weergave":"Postcode"},{"naam":"adres","weergave":"Adres"}];
 
 let currentPage = 1;
 let parameters = new FormData();
@@ -86,10 +86,12 @@ function initAlternateSort(){
 
         $(".search-content-header-bottom").prepend("<fieldset class='result-sorting'>" +
                                                                 "<label class='result-sorting-label'>Sorteer op: </label>" +
-                                                                "<select class='result-sorting-select'>" +
+                                                                "<select class='result-sorting-select' id='sortResults'>" +
                                                                      selection +
                                                                 "</select>" +
                                                             "</fieldset>");
+
+        document.getElementById('sortResults').addEventListener('change', onChange);
 
         $(resultContainer).after("<div class='search-content-output-extend' data-instant-search-output='results'></div>");
         $(".search-content-output-extend").attr("id","data-container");
@@ -578,8 +580,8 @@ function fillAlternateSort(data){
                                                                 "</li>" +
                                                                 (element["kamers"] === undefined ? "" : "<li>" + element["kamers"] + " kamers</li>") +
                                                             "</ul>" +
-                                                            ((optionItems.woon && parseInt(element["woonprice"]) !== 0 && element["woonprice"] !== undefined) ? "<ul class='search-result-kenmerken'>Woonoppervlakte prijs per m²: € " + parseInt(element["woonprice"]).toLocaleString('nl-NL') + "</ul>" : "") +
-                                                            ((optionItems.perceel && parseInt(element["perceelprice"]) !== 0  && element["perceelprice"] !== undefined) ? "<ul class='search-result-kenmerken'>Perceeloppervlakte prijs per m²: € " + parseInt(element["perceelprice"]).toLocaleString('nl-NL') + "</ul>" : "") +
+                                                            ((optionItems.woon && element["woonprice"] !== undefined) ? "<ul class='search-result-kenmerken'>Woonoppervlakte prijs per m²: € " + parseInt(element["woonprice"]).toLocaleString('nl-NL') + "</ul>" : "") +
+                                                            ((optionItems.perceel && element["perceelprice"] !== undefined) ? "<ul class='search-result-kenmerken'>Perceeloppervlakte prijs per m²: € " + parseInt(element["perceelprice"]).toLocaleString('nl-NL') + "</ul>" : "") +
                                                         "</div>" +
                                                     "</div>" +
                                                 "</div>" +
@@ -589,6 +591,13 @@ function fillAlternateSort(data){
 
     html += "</ol>";
     return html
+}
+
+function onChange(){
+    let dropdown = document.getElementById("sortResults");
+    let optionIndex  = dropdown.selectedIndex;
+    let optionValue = dropdown.options[optionIndex].value;
+    console.log(optionValue);
 }
 
 function editPage(type,data){
@@ -768,7 +777,6 @@ function editPage(type,data){
                         }
                     }
                 }
-
                 results.push(result)
             }
         }
